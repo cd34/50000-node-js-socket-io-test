@@ -1,0 +1,16 @@
+{
+  "name": "50000-node-js-socket-io-test",
+  "version": "2.0.0",
+  "description": "50k simultaneous WebSocket connection test using Node.js and Socket.IO",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "geoip-lite": "^1.4.10",
+    "socket.io": "^4.8.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

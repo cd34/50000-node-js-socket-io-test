@@ -1,113 +1,112 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>50k Connection Test</title>
-
-<link rel="stylesheet" href="http://csnap.colocdn.com/bootstrap/css/bootstrap40.min.css"/>
-<script type="text/javaScript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script type="text/javaScript" src="/socket.io/socket.io.js"></script>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<meta property="og:title" content="50k Simultaneous User Test" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="http://50k.cd34.com/" />
-<meta property="og:site_name" content="50k connection test" />
-<meta property="fb:admins" content="767257850" />
-<link href="https://plus.google.com/108209118018433259010" rel="publisher" />
-<!-- yeah, it's bootstrap, what about it? -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<meta property="og:title" content="50k Simultaneous User Test">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="50k connection test">
 </head>
 <body>
-<div class="container">
-<div class="row">
-<div class="span12">
-<div class="well">
-<h3>If you can, leave this open in a tab or window - I'm testing concurrent
-connections</h3>
-<h2>What is this?</h2>
-<p>I've been working on a project and I've tested and benchmarked and 
-toyed with the settings, but, we all know that lab testing and real-world
-situations can sometimes differ.</p>
-<p>This page was designed to allow me to test and gather real-world data
-on what TCP settings and app settings are required to support 50k
-simultaneous connections.</p>
-<p>Connection data is logged - not your IP, not your cookie, not your browser,
-etc. The only thing I am looking at are some TCP parameters.</p>
-<h2>Tell your friends, and, Thank you for helping me test this.</h2>
-<h2>What does it do?</h2>
-<p>The background color is adjusted from <strong>black</strong> to 
-<strong>white</strong> (0 to 50000)
-people. A current counter is displayed to see how close we are.</p>
-</div>
-<div class="well"><h1 id="ctr">test</h1></div>
-<div class="well">
-<div style="float:left;">
-<h4>Tell People:</h4>
-</div>
-<div style="float:left;">
-<g:plusone href="http://50k.cd34.com/"></g:plusone>
-</div>
-<div style="float:left;">
-<a href="http://twitter.com/share?url=http://50k.cd34.com/&text=cd34's%2050k%20test%20-%20help%20me%20reach%2050k%20simultaneous%20users!" class="twitter-share-button" data-count="horizontal" data-via="mcd34">Tweet</a>
-</div>
-<div style="float:left;">
-<div id="fb-root"></div>
-<fb:like href="http://50k.cd34.com/" width="250" show_faces="false" font="" layout="button_count" action="recommend"></fb:like>
+<div class="container py-4">
+  <div class="row">
+    <div class="col-12">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h3>If you can, leave this open in a tab or window - I'm testing concurrent connections</h3>
+          <h2>What is this?</h2>
+          <p>I've been working on a project and I've tested and benchmarked and
+          toyed with the settings, but, we all know that lab testing and real-world
+          situations can sometimes differ.</p>
+          <p>This page was designed to allow me to test and gather real-world data
+          on what TCP settings and app settings are required to support 50k
+          simultaneous connections.</p>
+          <p>Connection data is logged - not your IP, not your cookie, not your browser,
+          etc. The only thing I am looking at are some TCP parameters.</p>
+          <h2>Tell your friends, and, Thank you for helping me test this.</h2>
+          <h2>What does it do?</h2>
+          <p>The background color is adjusted from <strong>black</strong> to
+          <strong>white</strong> (0 to 50000)
+          people. A current counter is displayed to see how close we are.</p>
+        </div>
+      </div>
+
+      <div class="card mb-3">
+        <div class="card-body">
+          <h1 id="ctr">Connecting...</h1>
+        </div>
+      </div>
+
+      <div class="card mb-3">
+        <div class="card-body">
+          <p>Built with <a href="https://nodejs.org/">Node.js</a>,
+          <a href="https://socket.io/">Socket.IO</a>,
+          <a href="https://www.npmjs.com/package/geoip-lite">geoip-lite</a>, and
+          <a href="https://developers.google.com/chart/interactive/docs/gallery/geochart">Google GeoChart</a>.</p>
+        </div>
+      </div>
+
+      <div class="card mb-3">
+        <div class="card-body">
+          <div id="chart_div" style="width: 100%; height: 500px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-</div>
-<div class="well">
-<p>Built with <a href="http://nodejs.com/">node.js</a>, <a href="http://socket.io/">socket.io</a> (pity socket.io doesn't support <a href="https://github.com/LearnBoost/socket.io-client/issues/260">IPv6</a>... yet), <a href="https://github.com/bcantrill/node-libGeoIP">node-libGeoIP</a>, <!-- yes, oxford comma --> <a href="http://code.google.com/apis/chart/interactive/docs/gallery/geochart.html">Google's geochart</a>. Not using IPv6? <a href="http://tunnelbroker.net/">TunnelBroker</a> Code here: <a href="http://code.google.com/p/50000-node-js-socket-io-test/">http://code.google.com/p/50000-node-js-socket-io-test/</a></p>
-</div>
+<script src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+google.charts.load('current', { packages: ['geochart'] });
 
-<div class="well">
-    <script type='text/javascript' src='https://www.google.com/jsapi'></script>
-    <script type='text/javascript'>
-     google.load('visualization', '1', {'packages': ['geochart']});
+let chartReady = false;
+let pendingGraph = null;
 
-      function drawRegionsMap(graph) {
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Country');
-        data.addColumn('number', 'Popularity');
-	data.addRows(graph);
-
-        var options = {};
-
-        chart = new google.visualization.GeoChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-    };
-    </script>
-<div id="chart_div" style="width: 900px; height: 500px;"></div>
-</div>
-</div>
-</div>
-<script type="text/javascript">
-<!--
-var a=["https://apis.google.com/js/plusone.js","http://platform.twitter.com/widgets.js","http://connect.facebook.net/en_US/all.js#appId=238646832821223&xfbml=1"];for(script_index in a){var b=document.createElement("script");b.type="text/javascript";b.async=!0;b.src=a[script_index];var c=document.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)};
-var socket = io.connect('http://50k.cd34.com');
-  socket.on('country', function (data) {
-    drawRegionsMap(data['graph']);
-  });
-  socket.on('50k', function (data) {
-    var watchers = data['watchers'] < 50000 ? data['watchers'] : 50000;
-    var message = data['watchers'] + ' currently connected, ' + (watchers < 50000 ? 50000 - watchers + ' to go' : ' Goal reached!');
-    $('#ctr').html(message);
-    $('body').css('background-color', function(index, value) {
-      return '#' + [0,0,0,0,0,0].concat(parseInt(watchers*335.5443).toString(16).split("")).reverse().slice(0,6).reverse().join('');
-      // new method, while more accurate, is less visually appealing
-      //return bgcolor(watchers);
-  });
+google.charts.setOnLoadCallback(() => {
+  chartReady = true;
+  if (pendingGraph) {
+    drawRegionsMap(pendingGraph);
+    pendingGraph = null;
+  }
 });
 
-function pad_color(col) {
-  return ("00" + col).split("").reverse().slice(0,2).reverse().join("");
+function drawRegionsMap(graph) {
+  if (!chartReady) {
+    pendingGraph = graph;
+    return;
+  }
+  const data = new google.visualization.DataTable();
+  data.addColumn('string', 'Country');
+  data.addColumn('number', 'Connections');
+  data.addRows(graph);
+
+  const chart = new google.visualization.GeoChart(document.getElementById('chart_div'));
+  chart.draw(data, {});
 }
-function bgcolor(cnt) {
-  r = g = pad_color(parseInt(cnt/196).toString(16));
-  b = pad_color(parseInt(cnt % 196.08).toString(16));
-  return '#'+[r,g,b].join("");
+
+function padColor(val) {
+  return val.toString(16).padStart(2, '0');
 }
-// -->
+
+const socket = io();
+
+socket.on('country', (data) => {
+  drawRegionsMap(data.graph);
+});
+
+socket.on('50k', (data) => {
+  const watchers = Math.min(data.watchers, 50000);
+  const message = data.watchers + ' currently connected, ' +
+    (watchers < 50000 ? (50000 - watchers) + ' to go' : 'Goal reached!');
+  document.getElementById('ctr').textContent = message;
+
+  const brightness = Math.round((watchers / 50000) * 255);
+  const hex = padColor(brightness);
+  document.body.style.backgroundColor = '#' + hex + hex + hex;
+});
 </script>
 </body>
 </html>
